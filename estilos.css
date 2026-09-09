@@ -1,0 +1,162 @@
+/* Paleta moderna y variables de animación */
+:root {
+    --color-primario: #2563EB; /* Azul eléctrico / Trust Blue */
+    --color-primario-hover: #1D4ED8;
+    --color-fondo: #F9FAFB; /* Gris muy suave */
+    --color-superficie: #FFFFFF;
+    --color-texto: #1F2937;
+    --color-texto-secundario: #6B7280;
+    --borde-radio: 12px;
+    --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --sombra-fuerte: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 40px 20px;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+h1 {
+    color: var(--color-texto);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: var(--color-texto-secundario);
+    margin-bottom: 2rem;
+}
+
+/* Formularios tipo Tarjeta Moderna */
+form {
+    background-color: var(--color-superficie);
+    padding: 40px;
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-suave);
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto de elevación al hacer hover en la tarjeta */
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-fuerte);
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    background-color: var(--color-fondo);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+}
+
+/* Animación al hacer clic en un campo */
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    background-color: var(--color-superficie);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: var(--color-primario-hover);
+}
+
+button:active {
+    transform: scale(0.98); /* Efecto de clic real */
+}
+
+/* Tablas Modernas */
+table {
+    background-color: var(--color-superficie);
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: var(--sombra-suave);
+    border-radius: var(--borde-radio);
+    overflow: hidden;
+}
+
+th, td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+th {
+    background-color: #F3F4F6;
+    color: var(--color-texto-secundario);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+tr {
+    transition: background-color 0.2s;
+}
+
+tr:hover {
+    background-color: #F9FAFB;
+}
+
+td:first-child {
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+a {
+    color: var(--color-primario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--color-primario-hover);
+    text-decoration: underline;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCIS - Trabajos Universitarios</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Bienvenido a la plataforma de LCIS</h1>
+    <p>Sube tu trabajo y nosotros nos encargamos del resto.</p> 
+    <!-- Inicio del Formulario -->
+    <form action="" method="post">
+        
+        <!-- Nombre o Anonimato -->
+        <label for="nombre">Nombre (Puedes usar un apodo si prefieres anonimato):</label><br>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan o 'Cliente Oculto'"><br><br>
+
+        <!-- Materia o Tema -->
+        <label for="materia">Materia o área de conocimiento:</label><br>
+        <input type="text" id="materia" name="materia" placeholder="Ej: Cálculo, Bases de Datos..." required><br><br>
+
+        <!-- Fecha límite -->
+        <label for="fecha_entrega">¿Para cuándo necesitas el trabajo?</label><br>
+        <input type="date" id="fecha_entrega" name="fecha_entrega" required><br><br>
+
+        <!-- Detalles -->
+        <label for="instrucciones">Instrucciones y detalles de la tarea:</label><br>
+        <textarea id="instrucciones" name="instrucciones" rows="4" cols="50" placeholder="Explica qué hay que hacer..." required></textarea><br><br>
+
+        <!-- Subir Archivo -->
+        <label for="archivo">Adjuntar documento (PDF, Word, ZIP):</label><br>
+        <input type="file" id="archivo" name="archivo" required><br><br>
+
+        <!-- Botón de Enviar -->
+        <button type="submit">Solicitar Cotización</button>
+
+    </form>   
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - LCIS</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Panel de Control LCIS</h1>
+    <p>Trabajos pendientes ordenados por fecha límite de entrega.</p>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Fecha Límite (Prioridad)</th>
+                <th>Cliente / Alias</th>
+                <th>Materia</th>
+                <th>Instrucciones</th>
+                <th>Archivo</th>
+                <th>Estado / Cotización</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Fila 1: El más urgente -->
+            <tr>
+                <td><strong>15 Sep 2026</strong></td>
+                <td>JuanPerez99</td>
+                <td>Ecuaciones Diferenciales</td>
+                <td>Resolver 5 ejercicios por el método del Wronskiano.</td>
+                <td><a href="#">taller_ecuaciones.pdf</a></td>
+                <td>Pendiente Cotizar</td>
+            </tr>
+            <!-- Fila 2: Menos urgente -->
+            <tr>
+                <td><strong>20 Sep 2026</strong></td>
+                <td>Anonimo_452</td>
+                <td>Programación (Java)</td>
+                <td>Hacer un CRUD con interfaz gráfica.</td>
+                <td><a href="#">requisitos_java.zip</a></td>
+                <td>En Proceso (Asignado a ti)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a href="index.html">Cerrar Sesión</a>
+</body>
+</html>
