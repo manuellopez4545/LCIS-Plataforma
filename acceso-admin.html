@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Administrativo - DoMyJob</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DISEÑO EXCLUSIVO DE TARJETA --- */
+        body { background-color: #f8fafc; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .login-card { background: #ffffff; width: 100%; max-width: 420px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; padding: 40px; box-sizing: border-box; }
+        .login-card form { background: transparent !important; box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
+        .login-header { text-align: center; margin-bottom: 30px; }
+        
+        /* Título DoMyJob con toque "Admin" */
+        .login-logo { font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 5px; letter-spacing: -0.5px; display: flex; align-items: center; justify-content: center; gap: 10px; } 
+        
+        
+        .form-group { margin-bottom: 20px; text-align: left; width: 100%; }
+        .form-label { display: block; font-size: 0.85em; font-weight: 600; color: #334155; margin-bottom: 8px; }
+        .form-input { width: 100% !important; padding: 12px 14px !important; border: 1px solid #cbd5e1 !important; border-radius: 8px !important; box-sizing: border-box !important; font-family: inherit; }
+        .form-input:focus { outline: none; border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important; }
+
+        /* Botones */
+        .submit-btn { width: 100% !important; background: #2563eb !important; color: white !important; border: none !important; padding: 12px !important; border-radius: 8px !important; font-weight: 600 !important; cursor: pointer; box-sizing: border-box !important; margin-bottom: 15px; transition: background 0.2s;}
+        .submit-btn:hover { background: #1d4ed8 !important; }
+        
+        .secondary-btn { width: 100% !important; background: #f8fafc !important; color: #475569 !important; border: 1px solid #cbd5e1 !important; padding: 12px !important; border-radius: 8px !important; font-weight: 600 !important; cursor: pointer; box-sizing: border-box !important; transition: all 0.2s; font-size: 0.9em !important; }
+        .secondary-btn:hover { background: #e2e8f0 !important; color: #1e293b !important; }
+
+        .footer-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; }
+        .footer-links a { color: #2563eb; font-weight: 600; text-decoration: none; font-size: 0.9em; }
+        
+        /* OCULTAR OJO POR DEFECTO DEL NAVEGADOR */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card animacion-entrada">
+        <div class="login-header">
+            <div class="login-logo">
+                <div class="login-logo-icon"></div>
+                DoMyJob
+            </div>
+            <p style="color: #ef4444; margin: 0; font-size: 1.1em; font-weight: 700;">Acceso Restringido</p>
+            <p style="color: #64748b; margin: 5px 0 0 0; font-size: 0.85em;">Portal exclusivo para personal autorizado.</p>
+        </div>
+
+        <!-- FORMULARIO ADMIN -->
+        <form id="form-admin">
+            <div class="form-group">
+                <label class="form-label" for="correo-admin">Correo Electrónico:</label>
+                <!-- Conserva tu ID original correo-admin -->
+                <input type="email" id="correo-admin" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password-admin">Contraseña:</label>
+                
+                <!-- CONTENEDOR DE CONTRASEÑA -->
+                <div style="position: relative; display: block; width: 100%;">
+                    <!-- Conserva tu ID original password-admin -->
+                    <input type="password" id="password-admin" class="form-input" required style="padding-right: 40px !important; margin: 0 !important;">
+                    
+                    <!-- SPAN INSELECCIONABLE DEL OJO -->
+                    <span id="btn-ojo-admin" style="position: absolute; right: 12px; top: 0; bottom: 0; margin: auto; height: 20px; width: 20px; cursor: pointer; color: #94a3b8; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
+                        
+                        <svg id="icono-ojo-admin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px; pointer-events: none;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Conservan tus IDs btn-entrar y btn-solicitar -->
+            <button type="submit" id="btn-entrar" class="submit-btn">Iniciar Sesión</button>
+            <button type="button" id="btn-solicitar" class="secondary-btn">Solicitar acceso como administrador</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="index.html">Volver al portal de clientes</a>
+        </div>
+    </div>
+
+    <script type="module" src="acceso-admin.js"></script>
+
+    <!-- SCRIPT DEL OJO -->
+    <script>
+        const btnOjoAdmin = document.getElementById('btn-ojo-admin');
+        const inputPwdAdmin = document.getElementById('password-admin');
+        const iconoOjoAdmin = document.getElementById('icono-ojo-admin');
+
+        btnOjoAdmin.addEventListener('click', () => {
+            if (inputPwdAdmin.type === 'password') {
+                inputPwdAdmin.type = 'text';
+                iconoOjoAdmin.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />';
+            } else {
+                inputPwdAdmin.type = 'password';
+                iconoOjoAdmin.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoMyJob - Crear Cuenta</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DISEÑO EXCLUSIVO DE TARJETA --- */
+        body { background-color: #f8fafc; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .login-card { background: #ffffff; width: 100%; max-width: 450px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0; padding: 40px; box-sizing: border-box; margin: 40px 0; }
+        .login-card form { background: transparent !important; box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
+        .login-header { text-align: center; margin-bottom: 30px; }
+        
+        /* Título DoMyJob */
+        .login-logo { font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 5px; letter-spacing: -0.5px; } 
+        
+        .tabs { display: flex; border-bottom: 1px solid #e2e8f0; margin-bottom: 25px; }
+        .tab-btn { flex: 1; background: none !important; border: none !important; padding: 12px 0; font-weight: 600; font-size: 0.9em; color: #94a3b8; cursor: pointer; border-bottom: 2px solid transparent !important; transition: all 0.2s; box-shadow: none !important; }
+        
+        /* MAGIA DE COLORES: Clases separadas para cada pestaña */
+        .tab-btn.active-blue { color: #2563eb; border-bottom-color: #2563eb !important; }
+        .tab-btn.active-green { color: #10b981; border-bottom-color: #10b981 !important; }
+        
+        .form-group { margin-bottom: 20px; text-align: left; width: 100%; }
+        .form-label { display: block; font-size: 0.85em; font-weight: 600; color: #334155; margin-bottom: 8px; }
+        .form-input { width: 100% !important; padding: 12px 14px !important; border: 1px solid #cbd5e1 !important; border-radius: 8px !important; box-sizing: border-box !important; font-family: inherit; }
+        
+        /* Foco azul para inputs normales */
+        .form-input:focus { outline: none; border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important; }
+        /* Foco verde exclusivo para el input anónimo */
+        #reg-alias-anon:focus { border-color: #10b981 !important; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important; }
+
+        .submit-btn { width: 100% !important; background: #10b981 !important; color: white !important; border: none !important; padding: 12px !important; border-radius: 8px !important; font-weight: 600 !important; cursor: pointer; box-sizing: border-box !important;}
+        .submit-btn:hover { background: #059669 !important; }
+        .submit-btn.blue { background: #2563eb !important; }
+        .submit-btn.blue:hover { background: #1d4ed8 !important; }
+        .footer-links { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; }
+        .footer-links a { color: #2563eb; font-weight: 600; text-decoration: none; }
+
+        /* OCULTAR OJO POR DEFECTO DEL NAVEGADOR */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+    </style>
+</head>
+<body> 
+    
+    <div class="login-card animacion-entrada">
+        <div class="login-header">
+            <div class="login-logo">DoMyJob</div>
+            <p style="color: #64748b; margin: 0; font-size: 0.9em;">Crear una cuenta nueva</p>
+        </div>
+
+        <div class="tabs">
+            <!-- Iniciamos con la clase active-blue por defecto -->
+            <button id="tab-reg-normal" class="tab-btn active-blue">Registro Normal</button>
+            <button id="tab-reg-anon" class="tab-btn">Modo Anónimo</button>
+        </div>
+
+        <!-- FORMULARIO 1: REGISTRO NORMAL -->
+        <form id="form-reg-normal">
+            <div class="form-group">
+                <label class="form-label">Correo Electrónico</label>
+                <input type="email" id="reg-correo" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nombre de Usuario (Alias)</label>
+                <input type="text" id="reg-alias-normal" class="form-input" placeholder="Ej: Juan99" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Número de Teléfono</label>
+                <input type="tel" id="reg-telefono" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contraseña</label>
+                
+                <!-- CONTENEDOR DE CONTRASEÑA MODIFICADO (Igual que en index.html) -->
+                <div style="position: relative; display: block; width: 100%;">
+                    <input type="password" id="reg-password" class="form-input" required minlength="6" style="padding-right: 40px !important; margin: 0 !important;">
+                    
+                    <!-- SPAN con user-select: none -->
+                    <span id="btn-ojo-reg" style="position: absolute; right: 12px; top: 0; bottom: 0; margin: auto; height: 20px; width: 20px; cursor: pointer; color: #94a3b8; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
+                        
+                        <!-- SVG con pointer-events: none -->
+                        <svg id="icono-ojo-reg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px; pointer-events: none;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                </div>
+                
+            </div>
+            <button type="submit" class="submit-btn blue">Completar Registro</button>
+        </form>
+
+        <!-- FORMULARIO 2: REGISTRO ANÓNIMO -->
+        <form id="form-reg-anon" style="display: none;">
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85em; color: #166534; line-height: 1.4;">
+                El registro anónimo no requiere correo ni contraseña, pero si olvidas tu alias perderás el acceso a tus cotizaciones.
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nombre de Usuario (Alias Único)</label>
+                <input type="text" id="reg-alias-anon" class="form-input" placeholder="Ej: ClienteX" required>
+            </div>
+            <button type="submit" class="submit-btn">Crear Cuenta Anónima</button>
+        </form>
+
+        <div class="footer-links">
+            <p style="margin: 0; font-size: 0.9em; color: #475569;">¿Ya tienes cuenta? <a href="index.html">Inicia Sesión aquí</a></p>
+        </div>
+    </div>
+
+    <script type="module" src="registro.js"></script>
+    
+    <!-- Script de intercambio de clases de colores -->
+    <script>
+        const btnRegNormal = document.getElementById('tab-reg-normal');
+        const btnRegAnon = document.getElementById('tab-reg-anon');
+        const formRegNormal = document.getElementById('form-reg-normal');
+        const formRegAnon = document.getElementById('form-reg-anon');
+        
+        btnRegNormal.addEventListener('click', () => {
+            // Ponemos el azul, quitamos el verde
+            btnRegNormal.classList.add('active-blue'); 
+            btnRegAnon.classList.remove('active-green');
+            formRegNormal.style.display = 'block'; 
+            formRegAnon.style.display = 'none';
+        });
+        
+        btnRegAnon.addEventListener('click', () => {
+            // Ponemos el verde, quitamos el azul
+            btnRegAnon.classList.add('active-green'); 
+            btnRegNormal.classList.remove('active-blue');
+            formRegAnon.style.display = 'block'; 
+            formRegNormal.style.display = 'none';
+        });
+    </script>
+    
+    <!-- SCRIPT DEL OJO -->
+    <script>
+        const btnOjoReg = document.getElementById('btn-ojo-reg');
+        const inputPwdReg = document.getElementById('reg-password');
+        const iconoOjoReg = document.getElementById('icono-ojo-reg');
+
+        btnOjoReg.addEventListener('click', () => {
+            if (inputPwdReg.type === 'password') {
+                inputPwdReg.type = 'text';
+                iconoOjoReg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />';
+            } else {
+                inputPwdReg.type = 'password';
+                iconoOjoReg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />';
+            }
+        });
+    </script>
+</body>
+</html>

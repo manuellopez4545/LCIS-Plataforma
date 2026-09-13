@@ -69,7 +69,11 @@ input[type="text"],
 input[type="password"],
 input[type="date"],
 textarea,
-input[type="file"] {
+input[type="file"],
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
@@ -159,4 +163,312 @@ a {
 a:hover {
     color: var(--color-primario-hover);
     text-decoration: underline;
+}
+/* --- BARRA DE NAVEGACIÓN Y MENÚ DESPLEGABLE (Diseño Moderno) --- */
+body {
+    margin: 0; /* Elimina los bordes blancos por defecto del navegador */
+}
+
+.navbar {
+    background-color: #ffffff;
+    padding: 15px 5%; /* Se adapta a pantallas grandes y pequeñas */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+    width: 100%;
+    box-sizing: border-box; /* Obliga a que ocupe el 100% de la ventana */
+    margin-bottom: 40px;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    font-weight: 900;
+    color: #2563eb;
+    letter-spacing: -0.5px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.dropbtn:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.02); /* Pequeño efecto de agrandado al tocar el botón */
+}
+
+/* Animación fluida del menú desplegable */
+.dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-15px); /* Empieza un poco más arriba */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+    position: absolute;
+    top: 120%; 
+    right: 0;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+    z-index: 100;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #f3f4f6;
+}
+
+.dropdown-content a {
+    color: #4b5563;
+    padding: 15px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f8fafc;
+    color: #2563eb;
+    padding-left: 26px; /* Efecto de flecha: el texto se desliza ligeramente a la derecha */
+}
+
+/* Disparador de la animación */
+.dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0); /* Cae a su posición final */
+}
+/* --- ESTILOS PROFESIONALES PARA TABLAS (Admin y Cliente) --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden; /* Mantiene los bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra elegante */
+    margin-top: 20px;
+    border: 1px solid #e5e7eb;
+}
+
+thead {
+    background-color: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+th {
+    padding: 16px 20px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    vertical-align: middle;
+    transition: background-color 0.2s ease;
+}
+
+/* Efecto al pasar el ratón por encima de una fila */
+tbody tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* --- CONTROLES DEL ADMINISTRADOR --- */
+.select-estado, .input-precio {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #1e293b;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.select-estado:focus, .input-precio:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15); /* Brillo azul al hacer clic */
+}
+
+.enlace-descarga {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.enlace-descarga:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+/* --- MODAL DE PAGO (Estilo Oscuro) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none; justify-content: center; align-items: center; z-index: 1000;
+}
+
+.modal-pago {
+    background-color: #1f2937; color: #f3f4f6;
+    border-radius: 12px; width: 800px; max-width: 95%;
+    display: flex; flex-wrap: wrap; padding: 25px; gap: 30px; position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.modal-cerrar {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 1.5em; color: #9ca3af; cursor: pointer; background: none; border: none;
+}
+.modal-cerrar:hover { color: white; }
+
+.modal-columna-izq { flex: 1; min-width: 300px; }
+.modal-columna-der { flex: 1; min-width: 300px; background-color: #374151; padding: 20px; border-radius: 10px; border: 1px solid #4b5563; }
+
+.pago-input, .pago-select {
+    width: 100%; background-color: #374151; border: 1px solid #4b5563;
+    color: white; padding: 10px; border-radius: 6px; margin-top: 5px; margin-bottom: 15px; box-sizing: border-box;
+}
+
+.pago-zona-archivo {
+    border: 2px dashed #4b5563; border-radius: 8px; padding: 30px;
+    text-align: center; cursor: pointer; margin-bottom: 20px; transition: border 0.2s;
+}
+.pago-zona-archivo:hover { border-color: #3b82f6; }
+
+.btn-enviar-pago {
+    width: 100%; background-color: #0284c7; color: white; border: none;
+    padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1em;
+}
+.btn-enviar-pago:hover { background-color: #0369a1; }
+
+.btn-abrir-pago {
+    background-color: #10b981; color: white; border: none; padding: 6px 12px;
+    border-radius: 5px; cursor: pointer; font-size: 0.85em; margin-top: 10px; font-weight: bold; transition: background 0.2s;
+}
+.btn-abrir-pago:hover { background-color: #059669; }
+/* =========================================
+   DISEÑO PROFESIONAL UI/UX (Panel Admin)
+   ========================================= */
+
+/* Limpiamos la estructura general para evitar restricciones de caja */
+body.admin-body {
+    background-color: #f1f5f9 !important; /* Gris ultra suave moderno */
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+}
+
+/* Barra superior fija, limpia, de extremo a extremo */
+.admin-navbar {
+    width: 100% !important;
+    background-color: #ffffff !important; /* Blanco limpio profesional */
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-brand {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.3px;
+}
+
+/* Botón de cerrar sesión elegante y sutil (Estilo Minimalista) */
+.btn-logout {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: #dc2626;
+    color: white;
+    border-color: #dc2626;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+/* Contenedor principal centrado con buen espaciado */
+.admin-container {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+/* Tipografía de secciones */
+.section-header h2 {
+    color: #0f172a;
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    margin-bottom: 4px;
+}
+
+.section-header p {
+    color: #64748b;
+    font-size: 0.95em;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Tarjetas de tablas con diseño flotante moderno */
+.table-container {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+/* Animación de entrada profesional */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animacion-entrada {
+    animation: fadeInSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

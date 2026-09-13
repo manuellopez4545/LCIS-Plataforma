@@ -3,47 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración - LCIS</title>
+    <title>Panel de Administración - DoMyJob</title>
     <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Tipografía y fondo general para asegurar coherencia */
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; padding: 0; }
+        
+        /* =========================================
+           1. MENÚ DESPLEGABLE (CON PUENTE INVISIBLE)
+           ========================================= */
+        .nav-controls { display: flex; align-items: center; }
+        
+        .dropdown { 
+            position: relative; 
+            display: inline-block; 
+        }
+
+        /* EL PUENTE INVISIBLE: Mantiene el hover activo al bajar el mouse */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 20px; /* Cubre el espacio vacío entre el botón y el menú */
+            background: transparent;
+            z-index: 999;
+        }
+
+        .btn-dropdown {
+            background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 8px 16px;
+            border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.9em; font-weight: 600;
+            cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s;
+            white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .dropdown:hover .btn-dropdown { background-color: #f8fafc; border-color: #94a3b8; }
+
+        .dropdown-content {
+            display: none; /* Oculto por defecto */
+            position: absolute; 
+            right: 0; 
+            top: calc(100% + 8px); /* Separación visual perfecta */
+            background-color: #ffffff; min-width: 220px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0; border-radius: 8px; z-index: 1000; overflow: hidden;
+            animation: fadeInMenu 0.2s ease-out;
+        }
+
+        /* Se muestra al pasar el mouse */
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .dropdown-content a {
+            color: #475569; padding: 12px 16px; text-decoration: none; display: block;
+            font-size: 0.9em; font-weight: 500; transition: background 0.2s;
+        }
+        .dropdown-content a:hover, .dropdown-content a.active { background-color: #f8fafc; color: #2563eb; font-weight: 600; }
+        .dropdown-content .divider { height: 1px; background-color: #e2e8f0; margin: 4px 0; }
+        .dropdown-content a.logout-action { color: #ef4444; font-weight: 600; }
+        .dropdown-content a.logout-action:hover { background-color: #fef2f2; color: #dc2626; }
+
+        /* =========================================
+           2. ESTILOS PROFESIONALES PARA BOTONES DE ACCIÓN
+           ========================================= */
+        #lista-pendientes td:last-child {
+            display: flex !important;
+            gap: 8px !important;
+            align-items: center;
+            justify-content: flex-start;
+            border: none;
+        }
+
+        #lista-pendientes td button {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: auto !important;
+            padding: 6px 14px !important;
+            margin: 0 !important;
+            border-radius: 6px !important;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            cursor: pointer;
+            transition: all 0.2s ease !important;
+            border: 1px solid transparent !important;
+        }
+
+        /* Botón Aprobar: Estilo Soft Green */
+        #lista-pendientes td button:nth-child(1) {
+            background-color: #ecfdf5 !important;
+            color: #059669 !important;
+            border-color: #a7f3d0 !important;
+        }
+        #lista-pendientes td button:nth-child(1):hover {
+            background-color: #10b981 !important;
+            color: #ffffff !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2) !important;
+        }
+
+        /* Botón Rechazar: Estilo Soft Red */
+        #lista-pendientes td button:nth-child(2) {
+            background-color: #fef2f2 !important;
+            color: #dc2626 !important;
+            border-color: #fecaca !important;
+        }
+        #lista-pendientes td button:nth-child(2):hover {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+            border-color: #ef4444 !important;
+            box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInMenu { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
 </head>
-<body>
-    <h1>Panel de Control LCIS</h1>
-    <p>Trabajos pendientes ordenados por fecha límite de entrega.</p>
+<body class="admin-body">
 
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Fecha Límite (Prioridad)</th>
-                <th>Cliente / Alias</th>
-                <th>Materia</th>
-                <th>Instrucciones</th>
-                <th>Archivo</th>
-                <th>Estado / Cotización</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Fila 1: El más urgente -->
-            <tr>
-                <td><strong>15 Sep 2026</strong></td>
-                <td>JuanPerez99</td>
-                <td>Ecuaciones Diferenciales</td>
-                <td>Resolver 5 ejercicios por el método del Wronskiano.</td>
-                <td><a href="#">taller_ecuaciones.pdf</a></td>
-                <td>Pendiente Cotizar</td>
-            </tr>
-            <!-- Fila 2: Menos urgente -->
-            <tr>
-                <td><strong>20 Sep 2026</strong></td>
-                <td>Anonimo_452</td>
-                <td>Programación (Java)</td>
-                <td>Hacer un CRUD con interfaz gráfica.</td>
-                <td><a href="#">requisitos_java.zip</a></td>
-                <td>En Proceso (Asignado a ti)</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Barra Superior Profesional -->
+    <nav class="admin-navbar">
+        <div class="admin-brand" style="display: flex; align-items: center; gap: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            LCIS | Panel de Control DoMyJob
+        </div>
+        
+        <div class="nav-controls">
+            <!-- Menú Desplegable -->
+            <div class="dropdown">
+                <button id="btn-menu" class="btn-dropdown">
+                    Menú Administrativo
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div id="miDropdown" class="dropdown-content">
+                    <a href="#" id="menu-trabajos" class="active">Gestión de Solicitudes</a>
+                    <a href="#" id="menu-equipo">Equipo de Trabajo (Admins)</a>
+                    <div class="divider"></div>
+                    <a href="#" id="btn-cerrar-admin" class="logout-action">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <br>
-    <a href="index.html">Cerrar Sesión</a>
+    <!-- Contenedor principal -->
+    <main class="admin-container animacion-entrada">
+        
+        <!-- SECCIÓN 1: Trabajos Activos -->
+        <div id="seccion-trabajos" class="admin-section fade-in">
+            <div class="section-header">
+                <h2>Gestión de Solicitudes</h2>
+                <p>Controla las cotizaciones y estados de los trabajos enviados por los clientes.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha Límite</th>
+                            <th>Materia</th>
+                            <th>Instrucciones</th>
+                            <th>Archivo</th>
+                            <th>Estado / Cotización</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-trabajos">
+                        <tr><td colspan="5" style="text-align: center; padding: 40px; color: #94a3b8;">Cargando base de datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: Gestión de Administradores -->
+        <div id="seccion-equipo" class="admin-section fade-in" style="display: none;">
+            <div class="section-header">
+                <h2>Equipo de Trabajo</h2>
+                <p>Solicitudes de compañeros esperando aprobación para operar el panel administrativo.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Correo / Alias</th>
+                            <th>Fecha de Solicitud</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-pendientes">
+                        <tr><td colspan="3" style="text-align: center; padding: 40px; color: #94a3b8;">Consultando solicitudes...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Script de datos -->
+    <script type="module" src="admin.js"></script>
+
+    <!-- Script visual -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuTrabajos = document.getElementById('menu-trabajos');
+            const menuEquipo = document.getElementById('menu-equipo');
+            const seccionTrabajos = document.getElementById('seccion-trabajos');
+            const seccionEquipo = document.getElementById('seccion-equipo');
+
+            menuTrabajos.addEventListener('click', (e) => {
+                e.preventDefault();
+                menuTrabajos.classList.add('active');
+                menuEquipo.classList.remove('active');
+                
+                seccionTrabajos.style.display = 'block';
+                seccionEquipo.style.display = 'none';
+            });
+
+            menuEquipo.addEventListener('click', (e) => {
+                e.preventDefault();
+                menuEquipo.classList.add('active');
+                menuTrabajos.classList.remove('active');
+                
+                seccionEquipo.style.display = 'block';
+                seccionTrabajos.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>

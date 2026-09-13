@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Trabajos - LCIS</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- Misma Barra de Navegación -->
+    <nav class="navbar">
+        <div class="navbar-brand">LCIS</div>
+        <div class="dropdown">
+            <button class="dropbtn">Mi Cuenta ▼</button>
+            <div class="dropdown-content">
+                <a href="cliente.html">Nueva Solicitud</a>
+                <a href="mis-trabajos.html">Mis Trabajos</a>
+                <a href="index.html">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- La Tabla del Cliente -->
+    <div style="padding: 0 30px;">
+        <h2>Estado de mis solicitudes</h2>
+        <p>Aquí puedes hacer seguimiento a las cotizaciones de los trabajos que has enviado.</p>
+        
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>Fecha Límite</th>
+                    <th>Materia</th>
+                    <th>Instrucciones</th>
+                    <th>Estado</th>
+                    <th>Cotización</th>
+                </tr>
+            </thead>
+            <tbody id="lista-mis-trabajos">
+                <tr>
+                    <td colspan="5" style="text-align: center;">Cargando mis trabajos...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Próximamente crearemos el archivo mis-trabajos.js -->
+    <script type="module" src="mis-trabajos.js"></script>
+    <!-- Modal de Pago Oculto -->
+    <div id="fondo-modal-pago" class="modal-overlay">
+        <div class="modal-pago">
+            <button class="modal-cerrar" id="btn-cerrar-modal">✕</button>
+            
+            <div class="modal-columna-izq">
+                <h2 style="margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span style="background: #0ea5e9; padding: 5px 10px; border-radius: 5px; font-size: 0.7em;">🏦</span> 
+                    Transferencia bancaria nacional
+                </h2>
+                <p style="color: #9ca3af; font-size: 0.9em; margin-bottom: 20px;">Selecciona tu banco y adjunta el comprobante (Peso Colombiano COP)</p>
+                
+                <form id="form-pago">
+                    <input type="hidden" id="pago-id-trabajo">
+                    
+                    <label style="font-size: 0.85em; color: #cbd5e1;">Banco *</label>
+                    <select id="pago-banco" class="pago-select" required>
+                        <option value="">Selecciona un banco</option>
+                        <option value="Nequi">Nequi (300 000 0000)</option>
+                        <option value="Bancolombia">Bancolombia (Ahorros 123456789)</option>
+                        <option value="Daviplata">Daviplata (300 000 0000)</option>
+                    </select>
+
+                    <label style="font-size: 0.85em; color: #cbd5e1;">Monto a pagar *</label>
+                    <input type="text" id="pago-monto" class="pago-input" readonly style="background-color: #4b5563; cursor: not-allowed;">
+
+                    <label style="font-size: 0.85em; color: #cbd5e1;">Comprobante de transferencia *</label>
+                    <div class="pago-zona-archivo" onclick="document.getElementById('pago-archivo').click()">
+                        <span style="font-size: 2em; display: block; margin-bottom: 10px;">📤</span>
+                        <strong>Haz clic para seleccionar tu comprobante</strong>
+                        <p style="font-size: 0.8em; color: #9ca3af; margin-top: 5px;" id="pago-nombre-archivo">Formatos: JPG, PNG, PDF</p>
+                    </div>
+                    <input type="file" id="pago-archivo" accept=".jpg, .jpeg, .png, .pdf" style="display: none;" required>
+
+                    <button type="submit" class="btn-enviar-pago" id="btn-enviar-comprobante">Enviar solicitud</button>
+                    <p style="font-size: 0.75em; color: #9ca3af; text-align: center; margin-top: 10px;">Tu solicitud será revisada por el administrador. Recibirás una notificación cuando se apruebe.</p>
+                </form>
+            </div>
+
+            <div class="modal-columna-der">
+                <h3 style="margin-top: 0;">¿Cómo hacer tu recarga?</h3>
+                <ol style="padding-left: 20px; line-height: 1.6; color: #d1d5db;">
+                    <li style="margin-bottom: 15px;"><strong>Selecciona tu banco:</strong> Elige la billetera o banco desde el que harás la transferencia.</li>
+                    <li style="margin-bottom: 15px;"><strong>Realiza la transferencia:</strong> Abre tu app bancaria y envía el dinero exacto a los números indicados en la lista desplegable.</li>
+                    <li style="margin-bottom: 15px;"><strong>Adjunta el comprobante:</strong> Sube la captura de pantalla o el PDF de la transferencia exitosa.</li>
+                </ol>
+                <div style="background: rgba(234, 179, 8, 0.1); border-left: 4px solid #eab308; padding: 10px; color: #fef08a; font-size: 0.85em; border-radius: 0 5px 5px 0;">
+                    ⚠️ Aprobación en máximo 30 minutos en horario de 8am a 6pm.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

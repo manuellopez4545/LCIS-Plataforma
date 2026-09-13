@@ -5,28 +5,275 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCIS - Iniciar Sesión</title>
     <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <h1>Portal de Acceso - LCIS</h1>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Al enviar el formulario, simulamos que nos lleva a la página del cliente -->
-    <form action="cliente.html" method="GET">
-        <h3>Iniciar Sesión</h3>
+    <style>
+        /* --- DISEÑO EXCLUSIVO Y PROTEGIDO PARA LOGIN --- */
+        body {
+            background-color: #f8fafc;
+            font-family: 'Inter', -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
         
-        <label for="usuario">Usuario / Correo:</label><br>
-        <input type="text" id="usuario" name="usuario" placeholder="Tu usuario" required><br><br>
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            border: 1px solid #e2e8f0;
+            padding: 40px;
+            box-sizing: border-box;
+        }
 
-        <label for="password">Contraseña:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+        /* RESET: Anulamos cualquier estilo global de form que venga de estilos.css */
+        .login-card form {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .login-subtitle {
+            color: #64748b;
+            font-size: 0.9em;
+            margin: 0;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 25px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            background: none !important;
+            border: none !important;
+            padding: 12px 0;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #94a3b8;
+            cursor: pointer;
+            border-bottom: 2px solid transparent !important;
+            transition: all 0.2s ease;
+            box-shadow: none !important;
+        }
+        
+        .tab-btn.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb !important;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            width: 100%;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100% !important;
+            padding: 12px 14px !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            font-size: 0.95em !important;
+            color: #1e293b !important;
+            background: #ffffff !important;
+            box-sizing: border-box !important;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1) !important;
+        }
+        
+        .forgot-pwd {
+            display: block;
+            font-size: 0.85em;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+        
+        .submit-btn {
+            width: 100% !important;
+            background: #2563eb !important;
+            color: white !important;
+            border: none !important;
+            padding: 12px !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            font-size: 0.95em !important;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-sizing: border-box !important;
+        }
+        
+        .submit-btn.success { background: #10b981 !important; }
+        
+        .info-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            color: #166534;
+            line-height: 1.4;
+        }
+        
+        .footer-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .footer-links p { margin: 0 0 10px 0; font-size: 0.9em; color: #475569; }
+        .footer-links a { color: #2563eb; font-weight: 600; text-decoration: none; }
+        .admin-link { font-size: 0.85em; color: #94a3b8 !important; font-weight: 500 !important; text-decoration: none; }
+        
+        /* OCULTAR OJO POR DEFECTO DEL NAVEGADOR */
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+            display: none;
+        }
+    </style>
+</head>
+<body> 
+    
+    <div class="login-card animacion-entrada">
+        <div class="login-header">
+            <div class="login-logo">
+                <div class="login-logo-icon"></div>
+                DoMyJob
+            </div>
+            <p class="login-subtitle">Inicia Sesión</p>
+        </div>
 
-        <!-- Opción de modo anónimo -->
-        <input type="checkbox" id="anonimo" name="anonimo">
-        <label for="anonimo">Modo Anónimo (No usar datos personales, solo un nombre de usuario o alias)</label><br><br>
+        <!-- Navegación de Pestañas -->
+        <div class="tabs">
+            <button id="tab-normal" class="tab-btn active">Usuario Registrado</button>
+            <button id="tab-anonimo" class="tab-btn">Acceso Anónimo</button>
+        </div>
 
-        <button type="submit">Entrar</button>
-    </form>
+        <!-- FORMULARIO 1: LOGIN NORMAL -->
+        <form id="form-normal">
+            <div class="form-group">
+                <label class="form-label" for="usuario-normal">Correo o Alias</label>
+                <input type="text" id="usuario-normal" class="form-input" placeholder="Ej: admin@lcis.com" required>
+            </div>
 
-    <p>¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
-    <p>¿Eres de LCIS? <a href="admin.html">Acceso Administrativo</a></p>
+            <div class="form-group">
+                <label class="form-label" for="password-normal">Contraseña</label>
+                <!-- CONTENEDOR DE CONTRASEÑA MODIFICADO -->
+                <div style="position: relative; display: block; width: 100%;">
+                    <input type="password" id="password-normal" class="form-input" placeholder="••••••••" required style="padding-right: 40px !important; margin: 0 !important;">
+                    
+                    <!-- AÑADIDO: user-select: none; para que el navegador no intente seleccionarlo como texto -->
+                    <span id="btn-ojo-index" style="position: absolute; right: 12px; top: 0; bottom: 0; margin: auto; height: 20px; width: 20px; cursor: pointer; color: #94a3b8; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;">
+                        
+                        <!-- AÑADIDO: pointer-events: none; al SVG para que el clic lo reciba directamente el span -->
+                        <svg id="icono-ojo-index" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px; pointer-events: none;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <a href="recuperar.html" class="forgot-pwd">¿Olvidaste tu contraseña?</a>
+
+            <button type="submit" class="submit-btn">Iniciar Sesión</button>
+        </form>
+
+        <!-- FORMULARIO 2: INGRESO ANÓNIMO -->
+        <form id="form-anonimo" style="display: none;">
+            <div class="info-box">
+                <strong>Modo Incógnito:</strong> Ingresa sin contraseña. Elige un nombre único para hacer seguimiento a tus solicitudes.
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="alias-anonimo">Nombre de usuario (Alias)</label>
+                <input type="text" id="alias-anonimo" class="form-input" placeholder="Ej: estudiante123" required>
+            </div>
+
+            <button type="submit" class="submit-btn success">Ingresar Anónimamente</button>
+        </form>
+
+        <div class="footer-links">
+            <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+            <a href="acceso-admin.html" class="admin-link">Acceso Administrativo</a>
+        </div>
+    </div>
+
+    <script type="module" src="index.js"></script>
+    <script>
+        const btnNormal = document.getElementById('tab-normal');
+        const btnAnonimo = document.getElementById('tab-anonimo');
+        
+        btnNormal.addEventListener('click', () => {
+            btnNormal.classList.add('active');
+            btnAnonimo.classList.remove('active');
+        });
+        
+        btnAnonimo.addEventListener('click', () => {
+            btnAnonimo.classList.add('active');
+            btnNormal.classList.remove('active');
+        });
+    </script>
+    <script>
+        // SCRIPT DEL OJO
+        const btnOjoIndex = document.getElementById('btn-ojo-index');
+        const inputPwdIndex = document.getElementById('password-normal');
+        const iconoOjoIndex = document.getElementById('icono-ojo-index');
+
+        btnOjoIndex.addEventListener('click', () => {
+            if (inputPwdIndex.type === 'password') {
+                inputPwdIndex.type = 'text';
+                iconoOjoIndex.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />';
+            } else {
+                inputPwdIndex.type = 'password';
+                iconoOjoIndex.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />';
+            }
+        });
+    </script>
 </body>
 </html>
