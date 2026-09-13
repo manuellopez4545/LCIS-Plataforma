@@ -472,3 +472,66 @@ body.admin-body {
 .animacion-entrada {
     animation: fadeInSlide 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+/* =======================================================
+   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (RESPONSIVE)
+   ======================================================= */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Tarjetas de Login y Registro (index y registro) */
+    .login-card {
+        padding: 25px 20px !important; /* Reducimos el espacio interior */
+        margin: 20px !important; /* Evitamos que choque con los bordes del celular */
+        width: calc(100% - 40px) !important;
+    }
+
+    .login-logo {
+        font-size: 24px !important; /* Título ligeramente más pequeño */
+    }
+
+    .tab-btn {
+        font-size: 0.8em !important; /* Texto de pestañas para que no se amontone */
+        padding: 10px 0 !important;
+    }
+
+    /* Truco anti-zoom: Evita que los iPhone hagan un zoom molesto al escribir */
+    .form-input {
+        font-size: 16px !important; 
+    }
+
+    /* 2. Barra superior de Administración (admin) */
+    .admin-navbar {
+        padding: 15px !important;
+        flex-direction: column !important; /* Pone el logo arriba y el menú abajo */
+        gap: 15px !important;
+        text-align: center;
+    }
+
+    .admin-container {
+        padding: 15px !important; /* Menos espacio a los lados en el panel */
+    }
+
+    /* 3. Menú Desplegable en Admin */
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dropdown-content {
+        right: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important; /* Centra el menú perfectamente en móviles */
+        width: 90vw; /* Toma el 90% de la pantalla del celular */
+    }
+
+    /* 4. Tablas (El dolor de cabeza en móviles solucionado) */
+    .table-container {
+        width: 100%;
+        overflow-x: auto !important; /* Permite deslizar la tabla hacia los lados con el dedo */
+        -webkit-overflow-scrolling: touch; /* Movimiento suave en celulares iOS */
+        border-radius: 8px;
+    }
+
+    table {
+        min-width: 700px !important; /* Evita que las columnas se aplasten. El usuario hará scroll lateral */
+    }
+}
