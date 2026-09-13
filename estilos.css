@@ -428,18 +428,36 @@ body.admin-body {
 /* =======================================================
    ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (RESPONSIVE)
    ======================================================= */
+/* =======================================================
+   ADAPTACIÓN PARA DISPOSITIVOS MÓVILES (RESPONSIVE)
+   ======================================================= */
 @media screen and (max-width: 768px) {
     
-    /* 1. Ajustes de Tipografía General */
+    /* 1. SOLUCIÓN CRÍTICA: Apagar el centrado forzado (Fix corte izquierdo) */
+    body {
+        display: block !important; /* Apaga Flexbox en el body */
+        width: 100% !important;
+        overflow-x: hidden !important; /* Evita que la pantalla baile de lado a lado */
+        padding: 0 !important; /* Quitamos padding general para ganar espacio */
+    }
+
+    /* 2. Ajustes de Tipografía General y Centrado manual */
     h1, h2 {
         font-size: 24px !important;
         line-height: 1.3 !important;
+        text-align: center !important;
+        margin: 20px 15px 10px 15px !important;
+    }
+    
+    p {
+        text-align: center !important;
+        margin: 0 15px 20px 15px !important;
     }
 
-    /* 2. Tarjetas de Login y Registro */
+    /* 3. Tarjetas de Login y Registro */
     .login-card {
         padding: 25px 20px !important;
-        margin: 20px !important;
+        margin: 20px auto !important; /* El 'auto' las centra horizontalmente */
         width: calc(100% - 40px) !important;
     }
 
@@ -452,16 +470,18 @@ body.admin-body {
         padding: 10px 0 !important;
     }
 
-    /* 3. Panel de Administración */
+    /* 4. Panel de Administración */
     .admin-navbar {
         padding: 15px !important;
         flex-direction: column !important;
         gap: 15px !important;
         text-align: center;
+        width: 100% !important;
     }
 
     .admin-container {
         padding: 15px !important;
+        margin: 0 auto !important;
     }
 
     .dropdown {
@@ -476,41 +496,29 @@ body.admin-body {
         width: 90vw;
     }
 
-    /* 4. Panel de Cliente */
+    /* 5. Panel de Cliente (Barra y Formularios) */
     .navbar {
         flex-direction: column !important;
         padding: 15px !important;
         gap: 12px !important;
         align-items: center !important;
         text-align: center;
+        box-sizing: border-box !important;
     }
 
     .navbar-brand {
         font-size: 22px !important;
     }
 
-    h1 {
-        text-align: center !important;
-        margin-top: 20px !important;
-        padding: 0 15px !important;
-    }
-
-    h1 + p {
-        text-align: center !important;
-        font-size: 15px !important;
-        padding: 0 15px !important;
-    }
-
     form {
         width: calc(100% - 30px) !important;
-        margin: 0 15px 30px 15px !important;
+        margin: 0 auto 30px auto !important; /* Lo centra perfectamente en la pantalla */
         padding: 20px 15px !important;
         box-sizing: border-box !important;
         border-radius: 10px !important;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
     }
 
-    /* 5. Prevención de Zoom en iOS y Ajuste de Cajas */
+    /* Prevención de Zoom en iOS */
     input[type="text"], 
     input[type="password"],
     input[type="email"],
@@ -524,17 +532,20 @@ body.admin-body {
         font-size: 16px !important; 
     }
 
-    /* 6. Envoltura de Tablas (Scroll Horizontal) */
-    .table-container, div[style*="overflow-x"] {
+    /* 6. TABLAS (Solución definitiva para Scroll Horizontal) */
+    .table-container {
         width: calc(100% - 30px) !important;
-        margin: 0 15px !important;
-        overflow-x: auto !important;
+        margin: 0 auto !important;
         display: block !important;
-        -webkit-overflow-scrolling: touch;
-        border-radius: 8px;
     }
 
+    /* Al darle block y width 100%, la tabla genera su propia barra de scroll interna */
     table {
-        min-width: 650px !important;
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch; /* Movimiento suave en iOS */
+        white-space: nowrap !important; /* Impide que las palabras se apachurren hacia abajo */
+        margin-bottom: 20px !important;
     }
 }
